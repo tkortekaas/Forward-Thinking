@@ -24,8 +24,10 @@ public class Main extends JPanel {
 	static int phase = 0; // Determines step in the tutorial
 	static boolean recentlySaved = false; // For assuring that the user saves its game before quitting
 	static int[] vars = new int[50]; // First 49 are the board state, last one is the amount of open fields
-	static URL first = Main.class.getResource("images/first.gif"), second = Main.class.getResource("images/second.gif"),
-			third = Main.class.getResource("images/third.gif"), fourth = Main.class.getResource("images/fourth.gif"); // All tutorial images
+	static URL first = Main.class.getResource("../images/first.gif"),
+			second = Main.class.getResource("../images/second.gif"),
+			third = Main.class.getResource("../images/third.gif"),
+			fourth = Main.class.getResource("../images/fourth.gif"); // All tutorial images
 	static Icon icon; // Icon for tutorial
 	static JButton button; // Button for tutorial
 
@@ -120,7 +122,13 @@ public class Main extends JPanel {
 		});
 		frame.pack();
 		frame.setVisible(true);
-
+		
+		//Make the GUI look prettier
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static void showTutorial() {
@@ -132,7 +140,7 @@ public class Main extends JPanel {
 				"<html>The goal of this game is to have just one tile left on the board by jumping over other tiles.</html>");
 		icon = new ImageIcon(fourth);
 		button = new JButton(icon);
-		
+
 		// Create the loop of the tutorial
 		button.addActionListener(new ActionListener() {
 			@Override
@@ -160,7 +168,7 @@ public class Main extends JPanel {
 				case 4:
 					icon = new ImageIcon(fourth);
 					label.setText(
-							"<html>The game is over when:<br>All but one tile remains<br>OR<br>When you can't jump anymore</html>");
+							"<html>The game is over when all but one tile remains<br>OR<br>When you can't jump anymore</html>");
 					break;
 				case 5:
 					// Return to the board
@@ -168,7 +176,6 @@ public class Main extends JPanel {
 					phase = 0;
 					break;
 				}
-				System.out.println(phase);
 				new JButton();
 				button.setIcon(icon);
 				phase++;
